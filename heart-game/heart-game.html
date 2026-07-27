@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>YUSUF 💖</title>
+    <style>
+      :root {
+        --bg1: #0b1020;
+        --bg2: #1b0b2a;
+        --card: #121a33;
+        --text: #eef2ff;
+        --muted: #aab1d6;
+      }
+      * {
+        box-sizing: border-box;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background:
+          radial-gradient(1200px 800px at 20% 10%, #2b1450 0%, transparent 55%),
+          radial-gradient(900px 700px at 90% 80%, #0f2b4a 0%, transparent 55%),
+          linear-gradient(160deg, var(--bg1), var(--bg2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+      }
+      .wrap {
+        width: min(980px, 100%);
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      @media (max-width: 860px) {
+        .wrap {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.03)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        letter-spacing: 0.2px;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+
+      .hud {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .pill {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+        color: var(--text);
+      }
+      .pill b {
+        font-variant-numeric: tabular-nums;
+      }
+      .btns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      button {
+        border: 0;
+        border-radius: 12px;
+        padding: 10px 12px;
+        cursor: pointer;
+        background: linear-gradient(180deg, #ff4d8d, #ff2e6f);
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 10px 30px rgba(255, 46, 111, 0.25);
+      }
+      button.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      button:active {
+        transform: translateY(1px);
+      }
+
+      .game {
+        position: relative;
+        height: 420px;
+        border-radius: 18px;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            700px 380px at 30% 20%,
+            rgba(255, 77, 141, 0.2),
+            transparent 55%
+          ),
+          radial-gradient(
+            700px 380px at 80% 70%,
+            rgba(90, 220, 255, 0.16),
+            transparent 55%
+          ),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.32));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        user-select: none;
+        touch-action: manipulation;
+      }
+      .hint {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        padding: 22px;
+        font-size: 16px;
+        line-height: 1.35;
+      }
+      .heart {
+        position: absolute;
+        font-size: 34px;
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        animation: floatUp linear forwards;
+      }
+      @keyframes floatUp {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -20%) scale(0.9);
+        }
+        10% {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          transform: translate(-50%, -120%) scale(1.15);
+        }
+      }
+
+      .right h2 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.92);
+      }
+      .log {
+        height: 260px;
+        overflow: auto;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.35;
+      }
+      .log p {
+        margin: 0 0 8px;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        outline: none;
+      }
+      .footerNote {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .badge {
+        display: inline-block;
+        margin-left: 6px;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(90, 220, 255, 0.14);
+        border: 1px solid rgba(90, 220, 255, 0.2);
+        color: #dff8ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Kalp Hırsızı 💖 <span class="badge">Kalp Topla</span></h1>
+        <div class="sub">
+          13 saniyede çıkan kalplere tıkla. Her 5 kalpte bir “mini mesaj”
+          açılır. İstersen sağdan isimleri yazıp özelleştir.
+        </div>
+
+        <div class="hud">
+          <div class="pill">Skor: <b id="score">0</b></div>
+          <div class="pill">Kalp: <b id="hits">0</b></div>
+          <div class="pill">Kalan Süre: <b id="time">30</b>s</div>
+          <div class="btns">
+            <button id="startBtn">Hırsızlığa Başla</button>
+            <button class="secondary" id="resetBtn">Sıfırla</button>
+          </div>
+        </div>
+
+        <div class="game" id="game">
+          <div class="hint" id="hint">
+            Hırsızlığa Başlat’a tıkla 💘<br />
+            Sonra ekranda beliren kalplere tıkla!
+          </div>
+        </div>
+      </div>
+
+      <div class="card right">
+        <h2>💌 Kalp Mesajı</h2>
+        <div class="log" id="log"></div>
+
+        <div class="row">
+          <input id="me" placeholder="Senin adın" />
+          <input id="them" placeholder="Sevdiğinin adı (örn: Yusuf)" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const game = document.getElementById("game");
+      const hint = document.getElementById("hint");
+      const scoreEl = document.getElementById("score");
+      const hitsEl = document.getElementById("hits");
+      const timeEl = document.getElementById("time");
+      const logEl = document.getElementById("log");
+
+      const meInput = document.getElementById("me");
+      const themInput = document.getElementById("them");
+
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+
+      // özellşen mesajlar
+      const messages = [
+        "5 kalp çalındı.",
+        "10 kalp çalındı.",
+        "15 kalp çalındı.",
+        "20 kalp çalındı",
+        "25 kalp çalındı.",
+        "25 kalp çalındı",
+        "25 kalp çalındı",
+        "25 kalp çalındı",
+        "25 kalp çalındı",
+        "yusufun bütün kalbine sahipsiniz. :) :)",
+      ];
+
+      let running = false;
+      let score = 0;
+      let hits = 0;
+      let timeLeft = 13;
+
+      let spawnTimer = null;
+      let clockTimer = null;
+
+      function nameMe() {
+        return meInput.value || "Ben";
+      }
+      function nameThem() {
+        return themInput.value || "Sen";
+      }
+
+      function log(msg) {
+        const p = document.createElement("p");
+        p.textContent = msg;
+        logEl.prepend(p);
+      }
+
+      function updateHUD() {
+        scoreEl.textContent = String(score);
+        hitsEl.textContent = String(hits);
+        timeEl.textContent = String(timeLeft);
+      }
+
+      function rand(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function spawnHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = Math.random() < 0.18 ? "💘" : "💖";
+
+        const rect = game.getBoundingClientRect();
+        const x = rand(40, rect.width - 40);
+        const y = rand(rect.height * 0.55, rect.height - 20);
+
+        heart.style.left = x + "px";
+        heart.style.top = y + "px";
+
+        const dur = rand(1.4, 2.4);
+        heart.style.animationDuration = dur + "s";
+
+        heart.addEventListener("click", () => {
+          if (!running) return;
+          hits++;
+          score += heart.textContent === "💘" ? 3 : 1;
+
+          // mini efekt: kaybol
+          heart.remove();
+
+          if (hits % 5 === 0) {
+            const i = Math.floor((hits / 5 - 1) % messages.length);
+            const msg = messages[i]
+              .replaceAll("{me}", nameMe())
+              .replaceAll("{them}", nameThem());
+
+            log("💌 " + nameMe() + " → " + nameThem() + ": " + msg);
+          } else {
+            log("💗 Kalp yakalandı! +" + (heart.textContent === "💘" ? 1 : 1));
+          }
+
+          updateHUD();
+        });
+
+        // süre bitene kadar yok olup gitsin
+        setTimeout(() => heart.remove(), (dur + 0.2) * 1000);
+
+        game.appendChild(heart);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        hint.style.display = "none";
+
+        log("🎮 Oyun başladı! " + nameMe() + " ve " + nameThem() + " için 💖");
+        updateHUD();
+
+        spawnTimer = setInterval(spawnHeart, 420); // kalp çıkma hızı
+        clockTimer = setInterval(() => {
+          timeLeft--;
+          updateHUD();
+          if (timeLeft <= 0) end();
+        }, 1000);
+      }
+
+      function end() {
+        running = false;
+        clearInterval(spawnTimer);
+        clearInterval(clockTimer);
+
+        log("⏳ Süre bitti! Skor: " + score + " | Kalp: " + hits);
+
+        // Oyun bitti mesajı
+        hint.style.display = "flex";
+        hint.innerHTML = `
+        Oyun Bitti 💞<br/>
+        Skor: <b>${score}</b> — Kalp: <b>${hits}</b><br/><br/>
+        Tekrar oynamak için Hırısızlığı Başlat’a bas.
+      `;
+      }
+
+      function reset() {
+        running = false;
+        clearInterval(spawnTimer);
+        clearInterval(clockTimer);
+
+        // kalpleri temizle
+        [...game.querySelectorAll(".heart")].forEach((h) => h.remove());
+
+        score = 0;
+        hits = 0;
+        timeLeft = 13;
+        updateHUD();
+
+        hint.style.display = "flex";
+        hint.textContent =
+          "Hırısızlığı Başlat’a bas 💘\nSonra ekranda beliren kalplere tıkla!";
+
+        logEl.innerHTML = "";
+        log("🧹 Sıfırlandı.");
+      }
+
+      startBtn.addEventListener("click", () => {
+        if (!running && timeLeft === 0) {
+          // bitti ekranından sonra
+          score = 0;
+          hits = 0;
+          timeLeft = 30;
+          updateHUD();
+          [...game.querySelectorAll(".heart")].forEach((h) => h.remove());
+        }
+        start();
+      });
+
+      resetBtn.addEventListener("click", reset);
+
+      // İlk durum
+      updateHUD();
+      log("💡 İsimleri yazıp daha tatlı hale getirebilirsin.");
+    </script>
+  </body>
+</html>
